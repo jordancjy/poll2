@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.QuestionVMMapper"><!-- 接口名称 -->
+  <select id="selectAll" resultMap="QuestionVMResultMap">  <!-- 查询结果映射到ClazzVMResultMap -->
+  	select * from poll_question
+  	<!-- id name questionType -->
+  </select>
+  
+  <select id="selectByQuestionnaireId" parameterType="long"
+  resultMap="QuestionVMResultMap">
+  select * from poll_question where id in(
+  select question_id from poll_qq where questionnaire_id=#{id}
+  )
+  </select>
+  
+  <!-- 定义resultMap -->
+  <resultMap type="com.briup.apps.poll.bean.extend.QuestionVM" 
+  id="QuestionVMResultMap">
+  <id column="id" property="id"/>  
+  <result column="name" property="name"/>
+  <result column="questionType" property="questionType"/> 
+  
+         <!-- ofType:每个元素的数据类型 -->
+  <collection 
+  		column="id"
+  		javaType="ArrayList"
+  		ofType="com.briup.apps.poll.bean.Options" 
+  		property="options"
+  		select="selectOptionsByQuestionId">
+  		</collection>
+  </resultMap>
+  
+  	<select id="selectOptionsByQuestionId" 
+  	parameterType="long"
+  	resultType="com.briup.apps.poll.bean.Options">
+  	select *from poll_options where question_id=#{id}
+  	</select>  
+</mapper>
+
+
+
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.ClazzVMMapper"><!-- 接口名称 -->
+  <select id="selectAll" resultMap="ClazzVMResultMap">  <!-- 查询结果映射到ClazzVMResultMap -->
+  	select * from poll_clazz
+  	<!-- id name description grade_id charge_id -->
+  </select>
+  
+  <!-- 定义resultMap -->
+  <resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMResultMap">
+  <id column="id" property="id"/>  <!-- col:数据库中列 pro：映射到对象中的属性  id：id列-->
+  <result column="name" property="name"/>
+  <result column="description" property="description"/> <!-- result：普通列 -->
+  <association 
+	  	column="grade_id"	  
+   		select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"
+   		property="grade">
+   </association>  <!-- associations：关联关系 关系列 -->
+  
+  <association 
+	  	column="charge_id"	  
+   		select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"
+   		property="charge">
+   </association>  <!-- associations：关联关系 关系列 -->
+  
+  
+  
+  
+  </resultMap>  
+</mapper>
+
+
+
+
+
