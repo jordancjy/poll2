@@ -31,5 +31,4 @@ public class QuestionnaireVM {
 	public void setQuestionVMs(List<QuestionVM> questionVMs) {
 		this.questionVMs = questionVMs;
 	}
-	
 }

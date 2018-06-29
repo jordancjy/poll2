@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.SurveyVMMapper">
+  <select id="selectById"
+  parameterType="long"
+   resultMap="SurveyVMResultMap">  
+  	select * from poll_survey where id=#{id}
+  	<!-- id status code surveyDate course_id -->
+  </select>
+  <select id="selectAll" resultMap="SurveyVMResultMap">
+  select * from poll_survey
+  </select>
+<!-- 将查询后的结果映射为SurveyVM -->  
+  <resultMap type="com.briup.apps.poll.bean.extend.SurveyVM" 
+  id="SurveyVMResultMap">
+  <id column="id" property="id"/>  
+  <result column="code" property="code"/>
+  <result column="surveyDate" property="surveydate"/> 
+  <result column="status" property="status"/> 
+  <association property="course" column="course_id"
+  select="com.briup.apps.poll.dao.CourseMapper.selectByPrimaryKey"
+  ></association>
+  </resultMap>  	
+</mapper>
+
+
+
+
+
