@@ -10,4 +10,8 @@ public interface IQuestionnaireService {
 	List<Questionnaire> findAll() throws Exception;
 	
 	QuestionnaireVM findById(long id) throws Exception;
+	
+	void deleteById(long id) throws Exception;
+	
+	void saveOrUpdate(Questionnaire  questionnaire,long[] ids) throws Exception;
 }
