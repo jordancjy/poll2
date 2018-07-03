@@ -14,9 +14,8 @@ public interface IAnswersService {
 	
 	void deleteById(long id) throws Exception;
 	
-	void save(Answers answers) throws Exception;
+	void saveOrUpdate(Answers answers) throws Exception;
 	
-	void update(Answers answers) throws Exception;
 	
 	void batchDelete(List<Long> ids) throws Exception;
 	

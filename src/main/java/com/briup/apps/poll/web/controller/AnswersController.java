@@ -19,9 +19,30 @@ import io.swagger.annotations.ApiOperation;
 @Api(description="答案相关接口")
 @RestController
 @RequestMapping("/answers")//映射
+
+
 public class AnswersController {
 	@Autowired//注入接口
 	private IAnswersService answersService;
+	
+	@ApiOperation(value="提交答卷，每个学生提交一份")
+	@PostMapping("submitAnswers")
+	public MsgResponse submitAnswers(Answers answers){
+		try {
+			//1.判断用户是否有答卷权限（是否提交过）
+			
+			//2.保存答卷信息
+			answersService.saveOrUpdate(answers);
+			return MsgResponse.success("提交成功！你的意见是我们的改进方向", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	
+	
+	
 	@ApiOperation(value="查询所有答案信息")
 	@GetMapping("findAllAnswers")
 	public MsgResponse findAllAnswers(){
@@ -57,23 +78,7 @@ public class AnswersController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	@ApiOperation(value="保存或修改答案信息",
-			notes="id为空时为保存操作，反之则为更新操作")
-	@PostMapping("saveOrUpdateAnswers")
-	public MsgResponse saveOrUpdateAnswers(Answers answers){
-		try {
-			if (answers!=null && answers.getId()!=null) {
-				answersService.update(answers);
-				
-			} else {
-				answersService.save(answers);
-			}
-			return MsgResponse.success("保存或更新成功", null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
-	}
+
 	
 	
 	@ApiOperation(value="查询所有答案信息",notes="答案信息中包括课调详细信息（不确定）")

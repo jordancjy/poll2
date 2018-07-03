@@ -38,16 +38,16 @@ public class AnswersServiceImpl implements IAnswersService{
 	}
 
 	@Override
-	public void save(Answers answers) throws Exception {
-		answersMapper.insert(answers);
+	public void saveOrUpdate(Answers answers) throws Exception {
+		if (answers.getId()!=null) {
+			answersMapper.updateByPrimaryKey(answers);
+		} else {
+			answersMapper.insert(answers);
+		}
 		
 	}
 
-	@Override
-	public void update(Answers answers) throws Exception {
-		answersMapper.updateByPrimaryKey(answers);
-		
-	}
+	
 
 	@Override
 	public void batchDelete(List<Long> ids) throws Exception {
