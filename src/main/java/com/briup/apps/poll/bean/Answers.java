@@ -12,7 +12,9 @@ public class Answers {
      *
      * @mbg.generated Mon Jun 25 10:19:42 CST 2018
      */
+
 	@ApiModelProperty(value="答卷编号")
+
     private Long id;
 
     /**
@@ -22,7 +24,9 @@ public class Answers {
      *
      * @mbg.generated Mon Jun 25 10:19:42 CST 2018
      */
+
 	@ApiModelProperty(value="单选题答案,格式为第一题分数|第二题分数，eg5|1|4|3")
+
     private String selections;
 
     /**

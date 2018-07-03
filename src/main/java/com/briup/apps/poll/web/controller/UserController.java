@@ -1,12 +1,3 @@
-/**
- * Project Name:poll
- * File Name:UserController.java
- * Package Name:com.briup.apps.poll.web.controller
- * Date:2018年6月12日上午9:09:17
- * Copyright (c) 2018, chenzhou1025@126.com All Rights Reserved.
- *
-*/
-
 package com.briup.apps.poll.web.controller;
 
 import java.util.List;
@@ -26,16 +17,6 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
- * ClassName:UserController <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
- * Date:     2018年6月12日 上午9:09:17 <br/>
- * @author   lichunyu
- * @version  
- * @since    JDK 1.6
- * @see 	 
- */
 @Api(description="用户相关接口")
 @RestController
 @RequestMapping("/user")

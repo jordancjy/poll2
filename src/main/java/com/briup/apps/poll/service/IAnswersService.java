@@ -18,5 +18,7 @@ public interface IAnswersService {
 	
 	
 	void batchDelete(List<Long> ids) throws Exception;
+	//通过课调id查询答卷
+	List<Answers>findAnswersBySurvey(long surveyId) throws Exception;
 	
 }
