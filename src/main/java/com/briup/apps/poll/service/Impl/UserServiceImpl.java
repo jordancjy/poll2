@@ -19,16 +19,6 @@ import com.briup.apps.poll.bean.UserExample;
 import com.briup.apps.poll.dao.UserMapper;
 import com.briup.apps.poll.service.IUserService;
 
-/**
- * ClassName:UserServiceImpl <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
- * Date:     2018年6月12日 上午9:09:41 <br/>
- * @author   lichunyu
- * @version  
- * @since    JDK 1.6
- * @see 	 
- */
 @Service
 public class UserServiceImpl implements IUserService {
 	@Autowired

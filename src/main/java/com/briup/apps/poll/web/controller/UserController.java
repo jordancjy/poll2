@@ -26,16 +26,6 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
- * ClassName:UserController <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
- * Date:     2018年6月12日 上午9:09:17 <br/>
- * @author   lichunyu
- * @version  
- * @since    JDK 1.6
- * @see 	 
- */
 @Api(description="用户相关接口")
 @RestController
 @RequestMapping("/user")
