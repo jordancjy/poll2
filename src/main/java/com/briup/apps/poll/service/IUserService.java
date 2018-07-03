@@ -1,12 +1,3 @@
-/**
- * Project Name:poll
- * File Name:IUserService.java
- * Package Name:com.briup.apps.poll.service
- * Date:2018年6月12日上午9:09:32
- * Copyright (c) 2018, chenzhou1025@126.com All Rights Reserved.
- *
-*/
-
 package com.briup.apps.poll.service;
 
 import java.util.List;
