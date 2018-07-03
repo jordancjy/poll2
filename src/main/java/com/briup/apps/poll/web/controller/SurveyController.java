@@ -23,6 +23,94 @@ public class SurveyController {
 	@Autowired
 	private ISurveyService surveyService;
 	
+	@ApiOperation(value="登录课调",notes="code表示课调编号")
+	@GetMapping("loginSurvey")
+	public MsgResponse loginSurvey(long code){
+		try {			
+			SurveyVM surveyVM=surveyService.findById(code);
+			if(surveyVM.getStatus().equals(Survey.STATUS_BEGIN)){
+				return MsgResponse.success("success", surveyVM);
+			}else{
+				return MsgResponse.error("课调状态："+surveyVM.getStatus());
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="审核课调",
+			notes="id表示课调编号，status表示审核状态，0表示审核不通过，1表示审核通过")
+	@GetMapping("checkSurvey")
+	public MsgResponse checkSurvey(long id,int status){
+		try {		
+			
+			Survey survey=surveyService.findSurveyById(id);
+			String message="审核通过";
+			
+			if(survey.getStatus().equals(Survey.STATUS_NO_CHECK)){
+				if(status==0){
+					message="审核不通过";
+					survey.setStatus(Survey.STATUS_CHECK_NOPASS);
+				}else{
+					survey.setStatus(Survey.STATUS_CHECK_PASS);
+				}	
+			}else{
+				message="课调状态不合法！";
+			}
+					
+			surveyService.saveOrUpdate(survey);
+			return MsgResponse.success(message, null);			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="通过状态查询课调")
+	@GetMapping("findSurveyByStatus")
+	public MsgResponse findSurveyByStatus(String status){
+		try {			
+			List<SurveyVM> list=surveyService.findByStatus(status);
+			return MsgResponse.success("sucess", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	
+	@ApiOperation(value="关闭课调")
+	@GetMapping("stopSurvey")
+	public MsgResponse stopSurvey(long id){
+		try {
+			Survey survey=surveyService.findSurveyById(id);
+			survey.setStatus(Survey.STATUS_NO_CHECK);
+			surveyService.saveOrUpdate(survey);
+			return MsgResponse.success("成功关闭课调", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="开启课调")
+	@GetMapping("startSurvey")
+	public MsgResponse startSurvey(long id){
+		try {
+			Survey survey=surveyService.findSurveyById(id);
+			//Long大写的为包装器类型
+			survey.setStatus(Survey.STATUS_BEGIN);
+			String code=survey.getId().toString();
+			survey.setCode(code);			
+			surveyService.saveOrUpdate(survey);
+			return MsgResponse.success("开启课调", null);					
+		} catch ( Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
 	
 
 	@ApiOperation(value="保存或更新课调",notes="只需要输入各类id即可")

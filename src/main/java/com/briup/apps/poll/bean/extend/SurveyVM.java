@@ -8,10 +8,21 @@ public class SurveyVM {
 	private String status;
 	private String code;
 	private String surveydate;
+	private Double average;
+	
 	//关系
 	private Course course;
+	private ClazzVM clazzVM;
+	private User teacher;
+	private QuestionnaireVM qnVM;
 	public Long getId() {
 		return id;
+	}
+	public Double getAverage() {
+		return average;
+	}
+	public void setAverage(Double average) {
+		this.average = average;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -58,9 +69,7 @@ public class SurveyVM {
 	public void setQnVM(QuestionnaireVM qnVM) {
 		this.qnVM = qnVM;
 	}
-	private ClazzVM clazzVM;
-	private User teacher;
-	private QuestionnaireVM qnVM;
+	
 	//题库没做完，问卷没做完，下面没法做
 	
 
