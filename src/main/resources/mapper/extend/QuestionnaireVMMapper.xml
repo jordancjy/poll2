@@ -23,7 +23,7 @@
   		ofType="com.briup.apps.poll.bean.extend.QuestionVM"
   		select="com.briup.apps.poll.dao.extend.QuestionVMMapper.selectByQuestionnaireId"></collection>
   		<!-- 通过questionnaire_id找到该问卷下所有问题的信息 -->
-  </resultMap>
+  </resultMap>   
   
 
 </mapper>

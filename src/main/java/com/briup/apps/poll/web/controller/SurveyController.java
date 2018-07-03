@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.briup.apps.poll.bean.Answers;
 import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.extend.SurveyVM;
+import com.briup.apps.poll.service.IAnswersService;
 import com.briup.apps.poll.service.ISurveyService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -22,6 +24,38 @@ import io.swagger.annotations.ApiOperation;
 public class SurveyController {
 	@Autowired
 	private ISurveyService surveyService;
+	@Autowired
+	private IAnswersService answersService;
+	
+	@ApiOperation(value="审核课调",notes="返回课调信息及答案")
+	@GetMapping("toCheckSurvey")
+	public MsgResponse toCheckSurvey(long id){
+		try {
+			SurveyVM surveyVM =surveyService.findById(id);
+			List<Answers> answers=answersService.findAnswersBySurvey(id);
+			double total=0.0;
+			for(Answers answer:answers){
+				String selectStr=answer.getSelections();
+				if(selectStr!=null){
+					String[] arr=selectStr.split("[|]");
+					double singleTotal=0.0;
+					for(String a:arr){
+						int select=Integer.parseInt(a);
+						singleTotal+=select;
+					}
+					double singleAverage=singleTotal/arr.length;
+					total+=singleAverage;
+				}
+			}
+			double average=total/answers.size();
+			surveyVM.setAverage(average);
+			return MsgResponse.success("success", surveyVM);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
 	
 	@ApiOperation(value="登录课调",notes="code表示课调编号")
 	@GetMapping("loginSurvey")

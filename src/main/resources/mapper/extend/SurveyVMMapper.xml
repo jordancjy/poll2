@@ -31,16 +31,17 @@
   <association property="teacher" column="user_id"
   select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"
   ></association>
- <!--  这个没写查询全部
+ <!--  这个没写查询全部   三个地方，clazzvmmpper.xml////clazzvmmpper.java///这个
+    -->
   <association property="qnVM" column="questionnaire_id"
-  select="com.briup.apps.poll.dao.extend.QuestionnaireVMMapper."
+  select="com.briup.apps.poll.dao.extend.QuestionnaireVMMapper.selectById"
   ></association>
 
   <association property="clazzVM" column="clazz_id"
   select="com.briup.apps.poll.dao.extend.ClazzVMMapper.selectClazzvmById"
   ></association>
-  三个地方，clazzvmmpper.xml////clazzvmmpper.java///这个
-    -->
+ 
+
   </resultMap>  	
 </mapper>
 
